@@ -219,10 +219,17 @@ footer a + a {
   display: inline-block;
   margin: 0;
   margin-left: 5px;
+  max-width: 90%;
 }
 .countup span {
   border-radius: 0 10px 10px 0;
   margin-left: 0;
+}
+
+.holder {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-evenly;
 }
 
 .content {
@@ -235,4 +242,12 @@ footer a + a {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  max-width: 50%;
+  border-radius: 20px;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.content + .content {
+  margin-left: 5px; 
 }
