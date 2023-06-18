@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel=stylesheet type=text/css href=/static/css/style.css>
+    <link rel="icon" href="/static/icons/icon.svg" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="DelicaBot" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://delicabot.ksiscute.repl.co" />
+    <meta
+      property="og:image"
+      content="{{ url_for('static', filename='icons/icon.png') }}"
+    />
+    <meta
+      property="og:description"
+      content="Work in progress website for a multipurpose multiplatform bot (for multiple playforms TBD)"
+    />
+    <meta name="theme-color" content="#bcbcff" />
+    <title>DelicaBot</title>
+  </head>
+  <body>
+    <div class="nav" id="nav">
+      <a href="{{ url_for('index') }}" class="active">Home</a>
+      <a href="{{ url_for('portfolio') }}">Portfolio</a>
+      <a href="{{ url_for('showcase') }}">Showcase</a>
+      {% if user %}
+      <a href="/profile/@{{ username }}">Your Account</a>
+      <a href="{{ url_for('settings') }}">Settings</a>
+      {% else %}
+      <a href="{{ url_for('get_started') }}">Get Started</a>
+      {% endif %}
+      <a href="{{ url_for('staff') }}">Staff</a>
+      <a href="{{ url_for('support') }}">Support</a>
+      <a href="javascript:void(0);" class="icon" onclick="closething()" id=bars>
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+    <div class="header">
+      <h1 style="font-size: 40px">DelicaBot</h1>
+      <p style="font-style: italic">"For the people, by the people."</p>
+      <button onclick="window.location = {{ url_for('get_started') }}">
+        Get Started
+      </button>
+    </div>
+    <footer
+      style="
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-content: center;
+      "
+    >
+      {% for platform in listed_platforms %} {% if platform == 'revolt' %}
+      <a href="{{ listed_platforms[platform] }}">
+        <svg
+          viewBox="0 0 37.438 37.438"
+          xmlns="http://www.w3.org/2000/svg"
+          style="font-size: 25px; color: #b2d9ff"
+          fill="#B2D9FF"
+          width="25px"
+          height="25px"
+        >
+          <path
+            d="m24.979,12.562c0,2.787 -1.52,4.46 -4.764,4.46l-5.371,0l0,-8.819l5.372,0c3.243,0 4.763,1.723 4.763,4.359zm-24,-11.555l5.2,7.213l0,28.36l8.666,0l0,-13.427l2.078,0l7.4,13.43l9.781,0l-8.21,-14.089a10.355,10.355 0 0 0 7.904,-10.287c0,-6.183 -4.358,-11.2 -13.075,-11.2l-19.744,0z"
+          />
+        </svg>
+      </a>
+      {% else %}
+      <a href="{{ listed_platforms[platform] }}">
+        <img
+          src="/static/icons/platforms/{{ platform }}.svg"
+          width="25px"
+          height="25px"
+          alt="{{ platform }}"
+        />
+      </a>
+      {% endif %} {% endfor %}
+    </footer>
+  </body>
+  <script>
+    function closething() {
+      var x = document.getElementById("nav");
+      var y = document.getElementById("bars");
+      if (x.className === "nav") {
+        x.className += " closed";
+        y.className += " closed";
+        
+      } else {
+        x.className = "nav";
+        y.className = "icon";
+      }
+    }
+  </script>
+</html>
